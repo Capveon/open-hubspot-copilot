@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.env
+.env.*
+*.md
+bench
+docs
+.DS_Store
+*.log
+tsconfig.tsbuildinfo

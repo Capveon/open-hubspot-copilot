@@ -1,0 +1,125 @@
+/*
+ * Shell: one hairline bar over one work surface. The bar carries the wordmark (home),
+ * where you are, and who you are — no navigation twins, no marketing footer.
+ */
+
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: var(--st-nav-h) 1fr;
+  background: var(--st-canvas);
+  color: var(--st-ink);
+}
+
+.shell--desk {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* Once the desk stacks, it is taller than the viewport — let the page scroll instead of clipping. */
+@media (max-width: 860px) {
+  .shell--desk {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: var(--st-nav-h);
+  background: var(--st-sheet);
+  border-bottom: 1px solid var(--st-line);
+}
+
+.bar__in {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  max-width: var(--st-max);
+  margin-inline: auto;
+  padding-inline: var(--st-gutter);
+}
+
+.shell--desk .bar__in {
+  max-width: none;
+}
+
+.bar__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  gap: 8px;
+  color: inherit;
+  flex: none;
+}
+
+a.bar__brand {
+  border-radius: 8px;
+  transition: opacity var(--dur-fast) var(--st-ease);
+}
+a.bar__brand:hover {
+  opacity: 0.7;
+}
+
+/* Live desk only: the queue you are working, so the bar answers "where am I". */
+.bar__ctx {
+  min-width: 0;
+  padding-left: 14px;
+  border-left: 1px solid var(--st-line);
+  color: var(--st-ink-3);
+  font-size: 0.8125rem;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.page {
+  padding: 40px var(--st-gutter) 72px;
+  max-width: var(--st-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sign-wrap {
+  min-height: calc(100dvh - var(--st-nav-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px var(--st-gutter);
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--st-ink-3);
+}
+.crumb a:hover {
+  color: var(--st-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.crumb__sep {
+  color: var(--st-ink-3);
+  opacity: 0.55;
+}
+
+.quiet-link {
+  color: var(--st-action);
+  text-underline-offset: 3px;
+}
+.quiet-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,162 @@
+/*
+ * Capveon product chrome. Light, quiet, Translate-shaped: white sheets, hairlines,
+ * one steel-blue action. No bevels.
+ */
+
+:root {
+  --st-canvas: #f7f9fb;
+  --st-sheet: #ffffff;
+  --st-sheet-2: #f1f4f7;
+  --st-ink: #0b0e11;
+  --st-ink-2: #454c52;
+  --st-ink-3: #5c646b;
+  --st-line: #e4e9ee;
+  --st-line-2: #cdd5dd;
+  --st-metal-face: #eef2f6;
+  --st-metal-hi: #f7f9fb;
+  --st-metal-lo: #c9d2db;
+  --st-metal-scribe: var(--st-line);
+  --st-action: #315b75;
+  --st-action-hi: #3d6d8c;
+  --st-action-lo: #274b63;
+  --st-action-wash: #e8f0f4;
+  --st-ok: #2f6b4f;
+  --st-risk: #b5463e;
+  --st-r: 10px;
+  --st-r-lg: 16px;
+  --st-max: 1120px;
+  --st-gutter: 24px;
+  --st-nav-h: 56px;
+  --st-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --st-shadow: 0 1px 2px rgba(10, 22, 34, 0.04), 0 8px 24px -18px rgba(10, 22, 34, 0.18);
+
+  --canvas: var(--st-canvas);
+  --surface: var(--st-sheet);
+  --surface-raised: var(--st-sheet);
+  --surface-muted: var(--st-sheet-2);
+  --shell: transparent;
+  --ink: var(--st-ink);
+  --ink-secondary: var(--st-ink-2);
+  --ink-tertiary: var(--st-ink-3);
+  --action: var(--st-action);
+  --action-hover: var(--st-action-lo);
+  --action-subtle: var(--st-action-wash);
+  --action-border: #b9ccd7;
+  --border-subtle: var(--st-line);
+  --border-strong: var(--st-line-2);
+  --success: var(--st-ok);
+  --risk: var(--st-risk);
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
+  --radius-2xl: 16px;
+  --radius-pill: 999px;
+  --focus-ring: rgba(49, 91, 117, 0.4);
+  --selection: color-mix(in srgb, var(--st-action) 22%, transparent);
+}
+
+.st-lede,
+.lede {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  color: var(--st-ink-2);
+  margin: 0;
+  max-width: 54ch;
+}
+
+.st-btn,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding-inline: 16px;
+  border-radius: var(--st-r);
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  color: var(--st-ink);
+  transition:
+    background var(--dur-fast) var(--st-ease),
+    border-color var(--dur-fast) var(--st-ease),
+    color var(--dur-fast) var(--st-ease);
+}
+
+.st-btn:disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.st-btn--primary,
+.btn-primary {
+  background: var(--st-action);
+  color: #fff;
+}
+.st-btn--primary:hover:not(:disabled),
+.btn-primary:hover:not(:disabled) {
+  background: var(--st-action-lo);
+}
+
+.st-btn--secondary,
+.btn-secondary {
+  background: var(--st-sheet);
+  border-color: var(--st-line);
+  color: var(--st-ink);
+}
+.st-btn--secondary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled) {
+  background: var(--st-sheet-2);
+  border-color: var(--st-line-2);
+}
+
+.st-btn--sm,
+.btn-sm {
+  height: 32px;
+  padding-inline: 12px;
+  font-size: 0.8125rem;
+}
+
+.btn-quiet {
+  background: transparent;
+  color: var(--st-ink-2);
+}
+.btn-quiet:hover:not(:disabled) {
+  color: var(--st-ink);
+  background: var(--st-sheet-2);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--st-risk);
+}
+.btn-danger:hover:not(:disabled) {
+  background: var(--risk-bg, #fbecea);
+}
+
+.brand__word {
+  font-family: var(--family-wordmark);
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-variation-settings: "opsz" 20;
+  letter-spacing: normal;
+}
+
+.brand__product {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--st-ink-3);
+  padding-left: 10px;
+  margin-left: 2px;
+  border-left: 1px solid var(--st-line);
+}

@@ -1,0 +1,57 @@
+{
+  "name": "open-hubspot-copilot",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "HubSpot power dialer with a live coach on glass. Next.js, Twilio Voice, GPT.",
+  "homepage": "https://copilot.capveon.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Capveon/open-hubspot-copilot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Capveon/open-hubspot-copilot/issues"
+  },
+  "keywords": [
+    "hubspot",
+    "twilio",
+    "dialer",
+    "sales",
+    "nextjs",
+    "clerk",
+    "openai"
+  ],
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "next dev --port 3210",
+    "build": "next build",
+    "start": "next start --port 3210",
+    "typecheck": "tsc --noEmit",
+    "bench": "tsx scripts/bench.ts",
+    "sim": "tsx evals/run.ts",
+    "db:migrate": "tsx scripts/migrate.ts"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.12.4",
+    "@twilio/voice-sdk": "^2.15.0",
+    "geist": "^1.3.1",
+    "next": "^15.1.6",
+    "postgres": "^3.4.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "twilio": "^5.5.0"
+  },
+  "devDependencies": {
+    "@open-strategies/core": "github:Capveon/open-strategies#path:packages/core",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

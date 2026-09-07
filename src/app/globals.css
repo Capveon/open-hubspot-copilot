@@ -1,0 +1,182 @@
+.practice {
+  padding: 1.5rem 1.25rem 3rem;
+  display: grid;
+  gap: 1.25rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.practice .top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.practice .top h1 {
+  font-size: 1.35rem;
+  font-weight: 550;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.practice .top p {
+  margin: 0.35rem 0 0;
+  color: var(--st-ink-2);
+  font-size: 0.9375rem;
+}
+
+.practice .controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--st-ink-2);
+}
+
+.practice .controls label {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.practice .stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.practice .stat {
+  background: var(--st-sheet);
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-r);
+  padding: 0.65rem 0.75rem;
+}
+
+.practice .stat b {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.practice .stat span {
+  color: var(--st-ink-3);
+  font-size: 0.75rem;
+}
+
+.practice .glass {
+  background: var(--st-sheet);
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-r-lg);
+  box-shadow: var(--st-shadow);
+  min-height: 220px;
+  padding: 1.5rem 1.35rem 1.2rem;
+}
+
+.practice .agree {
+  color: var(--st-ink-3);
+  font-size: 1rem;
+  min-height: 1.4em;
+}
+
+.practice .say {
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin: 0.35rem 0 0;
+  font-weight: 450;
+}
+
+.practice .say.draft {
+  color: var(--st-ink-3);
+}
+
+.practice .say.banned {
+  color: var(--st-risk);
+}
+
+.practice .meta-row {
+  margin-top: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--st-ink-3);
+  font-size: 0.8125rem;
+}
+
+.practice .split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1rem;
+}
+
+@media (max-width: 840px) {
+  .practice .split,
+  .practice .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.practice textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-r);
+  background: var(--st-sheet);
+  resize: vertical;
+}
+
+.practice .scenarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.practice .scenarios button {
+  background: var(--st-sheet-2);
+  color: var(--st-ink);
+  border: 1px solid var(--st-line);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.practice .scenarios button[data-active="true"] {
+  background: var(--st-action);
+  border-color: var(--st-action);
+  color: #fff;
+}
+
+.practice button.ghost {
+  background: transparent;
+  color: var(--st-ink);
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-r);
+  padding: 0.35rem 0.75rem;
+}
+
+.practice .note {
+  color: var(--st-ink-3);
+  font-size: 0.875rem;
+  margin: 0.4rem 0 0;
+}
+
+.practice .banned {
+  color: var(--st-risk);
+  font-size: 0.875rem;
+}
+
+.practice .log {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--st-sheet-2);
+  color: var(--st-ink-2);
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-r);
+  font-size: 0.75rem;
+  overflow: auto;
+  max-height: 220px;
+  white-space: pre-wrap;
+}
