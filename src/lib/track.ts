@@ -1,11 +1,11 @@
 import { appName, repName } from "./brand-config";
-import type { CallCard } from "./card";
+import { namedStack, type CallCard } from "./card";
 import type { CoachLine, GlassAction } from "./session-types";
 
-/** Only two glass states: the templated opener, then Mercury. */
+/** Only two glass states: the templated opener, then the coach. */
 export type Beat = "open" | "live";
 
-function bookLabel(book: CallCard["book"]): string {
+export function bookLabel(book: CallCard["book"]): string {
   if (book === "ww") return "wastewater";
   if (book === "combo") return "utility";
   return book;
@@ -15,16 +15,27 @@ export function beatLabel(beat: Beat): string {
   return beat === "open" ? "Open" : "Say this";
 }
 
-/** The one line configured beforehand. Everything after this is Mercury. */
-export function openerFromCard(card: CallCard): CoachLine {
+function bookOps(card: CallCard): string {
   const book = bookLabel(card.book);
+  return card.utility ? `${book} ops at ${card.utility}` : `${book} ops`;
+}
+
+/**
+ * Spoken cold open. Read word for word. Vendor name only if the card has one.
+ */
+export function openerFromCard(card: CallCard): CoachLine {
+  const who = card.firstName.trim() || "Hey";
+  const stack = namedStack(card.stack);
+  const systems = stack
+    ? `${stack} and GIS`
+    : "the work system and GIS you already run";
   return {
     action: "say",
     agree: "",
     say: [
-      `${card.firstName}, it's ${repName()} from ${appName()}.`,
-      `Cold call about ${book} ops at ${card.utility}, specifically how work history in ${card.stack} changes the ${card.jobNoun} list.`,
-      `Can I take twenty seconds?`,
+      `${who}, it's ${repName()} from ${appName()}.`,
+      `I'm calling because you run ${bookOps(card)}. We connect what's happening in the field to ${systems}, so the next job gets ranked by condition, not just install year.`,
+      `Can I take twenty seconds? Then you can dump me.`,
     ].join("\n\n"),
     move: "answer",
   };

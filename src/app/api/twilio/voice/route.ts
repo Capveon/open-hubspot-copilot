@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       partialResults: true,
       hints:
         process.env.OHC_STT_HINTS?.trim() ||
-        "Cityworks, CIP, main break, superintendent, operations, Tucson, water",
+        "CIP, CMMS, GIS, SCADA, superintendent, work order, lift station, pump, main break",
     });
   }
   const dial = vr.dial({ callerId: caller, answerOnBridge: true, timeout: 30 });

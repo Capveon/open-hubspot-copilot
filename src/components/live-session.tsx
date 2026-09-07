@@ -27,6 +27,20 @@ import { useDeskChrome } from "./shell";
 import { TranscriptView } from "./transcript-view";
 import { Icon } from "./ui/icon";
 
+const PRIOR_COACH_MAX = 8;
+
+type PriorCoach = { id: string; agree: string; say: string };
+
+function archiveCoach(prev: CoachLine, history: PriorCoach[]): PriorCoach[] {
+  const say = prev.say.trim();
+  if (!say) return history;
+  if (history[0] && similarSpeech(history[0].say, say)) return history;
+  return [{ id: `prior-${Date.now()}`, agree: prev.agree, say: prev.say }, ...history].slice(
+    0,
+    PRIOR_COACH_MAX,
+  );
+}
+
 /** No call yet → dialing → on the line → hung up and waiting on the human. */
 type Phase = "idle" | "connecting" | "live" | "wrap";
 
@@ -116,6 +130,7 @@ export function LiveSession({
   const [previewOnly, setPreviewOnly] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [coach, setCoach] = useState<CoachLine>(EMPTY_LINE);
+  const [priorCoach, setPriorCoach] = useState<PriorCoach[]>([]);
   const [mark, setMark] = useState<GlassMark>("");
   const [beat, setBeat] = useState<Beat>("open");
   const [released, setReleased] = useState(false);
@@ -131,6 +146,7 @@ export function LiveSession({
   const seqRef = useRef(0);
   const glassRef = useRef<GlassState>(freshGlass());
   const coachRef = useRef<CoachLine>(EMPTY_LINE);
+  const coachPaneRef = useRef<HTMLDivElement | null>(null);
   const linesRef = useRef<TranscriptLine[]>([]);
   const phaseRef = useRef<Phase>("idle");
   const contactRef = useRef<HsContact | null>(null);
@@ -199,6 +215,7 @@ export function LiveSession({
     const line = openerFromCard(cardFromContact(who));
     glassRef.current = freshGlass();
     coachRef.current = line;
+    setPriorCoach([]);
     setCoach(line);
     setBeat("open");
     setMark("");
@@ -310,6 +327,7 @@ export function LiveSession({
     if (who) commitOpener(who);
     else {
       glassRef.current = freshGlass();
+      setPriorCoach([]);
       setCoach(EMPTY_LINE);
       setBeat("open");
       setReleased(false);
@@ -490,12 +508,15 @@ export function LiveSession({
         glass.turnKey = key;
         glass.frozenUntil = Date.now() + FREEZE_MS;
         glass.beat = "live";
+        const prev = coachRef.current;
         coachRef.current = line;
         if (line.say.trim()) glass.said.push(line.say.trim());
+        setPriorCoach((history) => archiveCoach(prev, history));
         setCoach(line);
         setBeat("live");
         setMark("");
         persistGlass(line);
+        coachPaneRef.current?.scrollTo({ top: 0 });
       };
 
       if (decided.kind === "leave") {
@@ -608,6 +629,7 @@ export function LiveSession({
     setLines([]);
     activeCallRef.current = null;
     glassRef.current = freshGlass();
+    setPriorCoach([]);
     setCoach(EMPTY_LINE);
     setBeat("open");
     setMark("");
@@ -794,9 +816,23 @@ export function LiveSession({
             {markCopy || coachLabel(onLine || phase === "wrap" ? beat : "open", released, frozen)}
           </span>
         </header>
-        <div className="pane__body">
-          {coach.agree ? <p className="coach__agree">{coach.agree}</p> : null}
-          <p className={coachSay ? "coach__say" : "coach__say coach__say--empty"}>{coachSay || "\u00a0"}</p>
+        <div className="pane__body coach" ref={coachPaneRef}>
+          <div className="coach__now" aria-current="true">
+            {coach.agree ? <p className="coach__agree">{coach.agree}</p> : null}
+            <p className={coachSay ? "coach__say" : "coach__say coach__say--empty"}>
+              {coachSay || "\u00a0"}
+            </p>
+          </div>
+          {priorCoach.length > 0 ? (
+            <ol className="coach__prior">
+              {priorCoach.map((line) => (
+                <li key={line.id} className="coach__past">
+                  {line.agree ? <p className="coach__agree">{line.agree}</p> : null}
+                  <p className="coach__say">{line.say}</p>
+                </li>
+              ))}
+            </ol>
+          ) : null}
         </div>
         {onLine ? (
           <footer className="pane__foot">

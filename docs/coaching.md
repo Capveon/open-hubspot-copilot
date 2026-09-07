@@ -4,7 +4,7 @@ The desk is a reader. The model writes **one next line**. You say it or you don'
 
 ## Loop
 
-1. **Opener** is a template (`openerFromCard` in `src/lib/track.ts`). It stays on glass until **Delivered**.
+1. **Opener** is a template (`openerFromCard` in `src/lib/track.ts`). Name, title/book, utility, permission. A CMMS brand only if the card has one. It stays on glass until **Delivered**.
 2. After Delivered, the tape (what you said + what they said) goes to `POST /api/suggest`.
 3. **Freeze** keeps the current line even if the tape moves. **Resume** lets the coach run again.
 4. Hang up does not call the model again and does not dial the next person.
@@ -26,7 +26,7 @@ Ship your motion by editing these, not by forking the UI.
 
 Keep the JSON contract at the bottom of `CONSTITUTION`. The parser in `src/lib/suggest.ts` expects it.
 
-Capveon’s water / wastewater / electric ops sell is the example that is already in those files. Copy the structure, delete the Cityworks pitch, write yours.
+Capveon’s owner-operator motion is the working example: physical plant (pumps, sensors, crews) to the CMMS/GIS they already run. Copy the structure, rewrite the sell.
 
 ## Models
 

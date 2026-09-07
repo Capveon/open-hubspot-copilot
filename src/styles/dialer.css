@@ -522,6 +522,14 @@
 
 /* ——— coach ——— */
 
+.coach {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.coach__now {
+  flex: none;
+}
 .coach__agree {
   color: var(--st-ink-3);
   font-size: 1rem;
@@ -542,6 +550,27 @@
   color: var(--st-ink-3);
   font-size: 1.125rem;
   letter-spacing: -0.015em;
+}
+.coach__prior {
+  list-style: none;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--st-line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.coach__past .coach__agree {
+  color: color-mix(in srgb, var(--st-ink) 42%, var(--st-sheet));
+  font-size: 0.875rem;
+  min-height: 0;
+  margin: 0 0 4px;
+}
+.coach__past .coach__say {
+  color: color-mix(in srgb, var(--st-ink) 42%, var(--st-sheet));
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 400;
+  letter-spacing: -0.018em;
 }
 
 /*
