@@ -1,5 +1,5 @@
 import { appName, repName } from "./brand-config";
-import { namedStack, type CallCard } from "./card";
+import type { CallCard } from "./card";
 import type { CoachLine, GlassAction } from "./session-types";
 
 /** Only two glass states: the templated opener, then the coach. */
@@ -15,27 +15,27 @@ export function beatLabel(beat: Beat): string {
   return beat === "open" ? "Open" : "Say this";
 }
 
-function bookOps(card: CallCard): string {
-  const book = bookLabel(card.book);
-  return card.utility ? `${book} ops at ${card.utility}` : `${book} ops`;
+function capitalList(card: CallCard): string {
+  const n = (card.listNoun || "CIP").trim();
+  if (!n) return "the CIP";
+  if (/^the\s/i.test(n)) return n;
+  return `the ${n}`;
 }
 
 /**
- * Spoken cold open. Read word for word. Vendor name only if the card has one.
+ * Spoken cold open. Read word for word. Ask how the list works — do not pitch.
  */
 export function openerFromCard(card: CallCard): CoachLine {
-  const who = card.firstName.trim() || "Hey";
-  const stack = namedStack(card.stack);
-  const systems = stack
-    ? `${stack} and GIS`
-    : "the work system and GIS you already run";
+  const who = card.firstName.trim();
+  const list = capitalList(card);
+  const where = card.utility.trim() ? ` at ${card.utility.trim()}` : " on your side";
+  const hello = who ? `Hey ${who}` : "Hey";
   return {
     action: "say",
     agree: "",
     say: [
-      `${who}, it's ${repName()} from ${appName()}.`,
-      `I'm calling because you run ${bookOps(card)}. We connect what's happening in the field to ${systems}, so the next job gets ranked by condition, not just install year.`,
-      `Can I take twenty seconds? Then you can dump me.`,
+      `${hello}, this is ${repName()} with ${appName()}.`,
+      `I was calling because I was hoping you could give me the thousand-foot summary of how ${list} works${where} — how a job actually gets on that list.`,
     ].join("\n\n"),
     move: "answer",
   };

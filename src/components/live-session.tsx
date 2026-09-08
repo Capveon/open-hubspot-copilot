@@ -310,7 +310,7 @@ export function LiveSession({
   );
 
   /** Create the call record, then either dial it through Twilio or run it as Preview. */
-  const beginCall = useCallback(async () => {
+  const beginCall = useCallback(async (who?: HsContact | null) => {
     if (busyRef.current) return;
     busyRef.current = true;
     setNote(null);
@@ -323,9 +323,11 @@ export function LiveSession({
     setPhase("connecting");
     setMuted(false);
     setElapsed(0);
-    const who = contactRef.current;
-    if (who) commitOpener(who);
-    else {
+    const target = who !== undefined ? who : contactRef.current;
+    if (target) {
+      contactRef.current = target;
+      commitOpener(target);
+    } else {
       glassRef.current = freshGlass();
       setPriorCoach([]);
       setCoach(EMPTY_LINE);
@@ -613,6 +615,7 @@ export function LiveSession({
   async function goNext() {
     if (busyRef.current || atLastContact) return;
     const nextIndex = session.index + 1;
+    const nextWho = session.contacts[nextIndex] ?? null;
     try {
       const res = await fetch(`/api/sessions/${session.id}`, {
         method: "PATCH",
@@ -624,6 +627,7 @@ export function LiveSession({
       setNote(message(err, "Could not advance the queue"));
       return;
     }
+    contactRef.current = nextWho;
     setSession((prev) => ({ ...prev, index: nextIndex }));
     setCall(null);
     setLines([]);
@@ -634,7 +638,7 @@ export function LiveSession({
     setBeat("open");
     setMark("");
     setPhase("idle");
-    await beginCall();
+    await beginCall(nextWho);
   }
 
   async function leaveForLater() {

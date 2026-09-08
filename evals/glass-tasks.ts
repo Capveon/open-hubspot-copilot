@@ -17,20 +17,19 @@ function path(id: string, buyer: string[], deliveredAfter = 0): Task {
 export const GLASS_TASKS: Task[] = [
   path("path-a", [
     "This is Peter, who's this?",
-    "Sure. Yeah, go for it.",
-    "Yeah, can you tell me a little bit more? Right now at our yearly CIP our engineers go through and do this process.",
+    "Yeah. Yearly CIP, engineers go through it every spring. I don't sit in that meeting.",
+    "Yeah, can you tell me a little bit more? They sort it, we just send them what broke.",
     "Yeah. I might not be the right person for this. That's really an engineering thing on our side.",
     "You'd want Maria in engineering. She runs that list.",
   ]),
   path("path-b", [
     "This is Peter, who's this?",
-    "Go for it. What is it you guys actually do?",
+    "That's an engineering thing. What is it you guys actually do?",
     "Okay. Our engineers already do a lot of that.",
   ]),
   path("path-c", [
     "This is Peter, who's this?",
-    "Yeah, twenty seconds.",
-    "We already have Cityworks. And GIS.",
+    "We already have Cityworks. And GIS. That's the work.",
     "Yeah, Cityworks is the work orders. The CIP is still a spreadsheet planning rebuilds every spring.",
   ]),
   path("path-d", [

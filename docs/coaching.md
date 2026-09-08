@@ -4,7 +4,7 @@ The desk is a reader. The model writes **one next line**. You say it or you don'
 
 ## Loop
 
-1. **Opener** is a template (`openerFromCard` in `src/lib/track.ts`). Name, title/book, utility, permission. A CMMS brand only if the card has one. It stays on glass until **Delivered**.
+1. **Opener** is a template (`openerFromCard` in `src/lib/track.ts`). Name, Capveon, thousand-foot summary of how the CIP / capital list works there. No pitch. It stays on glass until **Delivered**.
 2. After Delivered, the tape (what you said + what they said) goes to `POST /api/suggest`.
 3. **Freeze** keeps the current line even if the tape moves. **Resume** lets the coach run again.
 4. Hang up does not call the model again and does not dial the next person.

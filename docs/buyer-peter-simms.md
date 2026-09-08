@@ -22,11 +22,11 @@ Pickup.
 
 Wait through his opener.
 
-> Sure. Yeah, go for it.
+> Yeah. Yearly CIP, engineers go through it every spring. I don't sit in that meeting.
 
 Wait.
 
-> Yeah, can you tell me a little bit more? Right now at our yearly CIP our engineers go through and do this process.
+> Yeah, can you tell me a little bit more? They sort it, we just send them what broke.
 
 Wait. He should ask about the yearly meeting or who ranks it. Not re-pitch.
 
@@ -48,7 +48,7 @@ Pickup.
 
 Wait through the opener.
 
-> Go for it. What is it you guys actually do?
+> That's an engineering thing. What is it you guys actually do?
 
 Wait. One explanation of the gap is fine here.
 
@@ -64,11 +64,11 @@ Hang up whenever you have seen enough.
 
 Pickup, then after the opener:
 
-> Yeah, twenty seconds.
+> We already have Cityworks. And GIS. That's the work.
 
 Wait.
 
-> We already have Cityworks. And GIS.
+> Yeah, Cityworks is the work orders. The CIP is still a spreadsheet planning rebuilds every spring.
 
 Wait. He should ask where it stops helping you **rank**, not offer to replace it.
 
